@@ -10,7 +10,7 @@ import com.example.springboot.app.models.dao.IClienteDao;
 import com.example.springboot.app.models.entity.Cliente;
 
 @Service
-public class ClienteServiceImplement implements IClienteService{
+public class ClienteServiceImpl implements IClienteService{
 
 	/**
 	 * Tengo los mismos metodos del dao. Puede haber mas de un dao
@@ -22,7 +22,7 @@ public class ClienteServiceImplement implements IClienteService{
 	@Transactional(readOnly = true)
 	@Override
 	public List<Cliente> findAll() {
-		return clienteDao.findAll();
+		return (List<Cliente>) clienteDao.findAll();
 	}
 
 	@Transactional
@@ -35,13 +35,13 @@ public class ClienteServiceImplement implements IClienteService{
 	@Transactional(readOnly = true)
 	@Override
 	public Cliente findOne(Long id) {
-		return clienteDao.findOne(id);
+		return clienteDao.findById(id).orElse(null);
 	}
 
 	@Transactional
 	@Override
 	public void delete(Long id) {
-		clienteDao.delete(id);
+		clienteDao.deleteById(id);
 		
 	}
 
